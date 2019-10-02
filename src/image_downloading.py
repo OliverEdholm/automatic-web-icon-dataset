@@ -7,10 +7,7 @@ import requests
 from lxml import html
 
 
-def _download_image(url):
-    if 'data:image' in url:
-        return
-
+def _clean_url(url):
     if url[:2] == '//':
         url = url[2:]
     elif url[:1] == '/':
@@ -19,8 +16,17 @@ def _download_image(url):
     if 'http' not in url:
         url = f'http://{url}'
 
+    return url
+
+
+def _download_image(url):
+    if 'data:image' in url:
+        return
+
+    url = _clean_url(url)
+
     try:
-        r = requests.get(url, stream=True)
+        r = requests.get(url, stream=True, timeout=10)
         if r.status_code == 200:
             path = f'/tmp/{uuid4()}'
 
@@ -37,7 +43,7 @@ def _download_image(url):
         print(e)
 
 
-def get_all_images(url):
+def get_all_images(url, max_n_images=100):
     page = requests.get(url).content
 
     tree = html.fromstring(page)
@@ -49,9 +55,10 @@ def get_all_images(url):
             image = _download_image(url)
             
             if image is not None:
-                alt_text = image_tag.attrib.get('alt') 
-
-                all_images.append((image, alt_text))
+                all_images.append((image, dict(image_tag.attrib)))
+        
+        if len(all_images) == max_n_images:
+            break
     
     return all_images
         

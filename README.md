@@ -1,10 +1,10 @@
 # Automatic icon dataset
 
 ### Summary
-Scraping top N websites on the Alexa ranking, getting all images, filtering based on if the image is a natural photograph or a computer graphic, and on how big the image is. Including alt-text if it follows a set of criterion.
+Scraping top N websites on the Alexa ranking, downloading all images, filtering based on if the image is a natural photograph or a computer graphic and other smaller sanity checks. All the attributes of every image tag is saved in an adjacent JSON file.
 
 ### Running
-`python3 -m bin.build_icon_dataset TOP_N OUT_DIRECTORY_PATH`
+`python3 -m bin.build_icon_dataset TOP_N OUT_DIRECTORY_PATH N_PROCESSES`
 
 ### Ways of determining if an image is a natural photograph or a computer graphic
 * Setting a threshold on how many unique colors a very small bilinearly resizes grayscale image has

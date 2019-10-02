@@ -10,5 +10,5 @@ def test_get_all_images():
 
     assert (all_images[0][0] == cv2.imread('data/test_images/vader.jpg')).all(), \
         'Should download Darth Vader image'
-    assert all_images[0][1] == 'Darth Vader FML', \
+    assert all_images[0][1] == {'alt': 'Darth Vader FML', 'src': 'vader.jpg'}, \
         'Should return Darth Vader alt text'

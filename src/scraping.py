@@ -13,7 +13,7 @@ def _is_url(url):
 
 
 def get_second_degree_urls(url):
-    page = requests.get(url).content
+    page = requests.get(url, timeout=10).content
 
     tree =  html.fromstring(page)
 
