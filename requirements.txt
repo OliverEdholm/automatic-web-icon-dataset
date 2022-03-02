@@ -69,7 +69,7 @@ pyzmq==18.1.0
 qtconsole==4.5.5
 queuelib==1.5.0
 requests==2.22.0
-Scrapy==1.7.3
+Scrapy==1.8.2
 Send2Trash==1.5.0
 service-identity==18.1.0
 setproctitle==1.1.10
